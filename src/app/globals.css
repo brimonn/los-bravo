@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  /* Debe coincidir con el padding-top del layout bajo el header fijo */
+  --header-offset: 5.375rem;
+  --bravo-red: #e31837;
+  --bravo-red-dark: #b5122b;
+  --bravo-red-glow: rgba(227, 24, 55, 0.45);
+  --bravo-black: #070707;
+  --bravo-black-soft: #121212;
+  --bravo-white: #f8f8f8;
+  --bravo-muted: #a3a3a3;
+}
+
+@theme inline {
+  --color-bravo-red: var(--bravo-red);
+  --color-bravo-red-dark: var(--bravo-red-dark);
+  --color-bravo-black: var(--bravo-black);
+  --color-bravo-black-soft: var(--bravo-black-soft);
+  --color-bravo-white: var(--bravo-white);
+  --color-bravo-muted: var(--bravo-muted);
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bebas), "Bebas Neue", ui-sans-serif, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bravo-black);
+  color: var(--bravo-white);
+  font-family: var(--font-sans);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-offset: 6.375rem;
+  }
+}
+
+::selection {
+  background: var(--bravo-red);
+  color: white;
+}
