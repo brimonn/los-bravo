@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SITE, getWhatsAppUrl } from "@/lib/constants";
 
 export function Hero() {
-  /** Un solo pantallazo bajo el navbar: la siguiente sección no asoma hasta hacer scroll */
+  
   const heroMin = "min-h-[calc(100svh-var(--header-offset))]";
 
   return (
