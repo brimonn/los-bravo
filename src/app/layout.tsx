@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import { SITE, getWhatsAppUrl } from "@/lib/constants";
 
 const dmSans = DM_Sans({
@@ -36,12 +37,14 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${dmSans.variable} ${bebas.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
-        <Navbar whatsappHref={getWhatsAppUrl()} />
-        <div className="flex flex-1 flex-col pt-[var(--header-offset)]">
-          {children}
-          <Footer />
-        </div>
-        <WhatsAppFloat href={getWhatsAppUrl()} />
+        <LanguageProvider>
+          <Navbar whatsappHref={getWhatsAppUrl()} />
+          <div className="flex flex-1 flex-col pt-[var(--header-offset)]">
+            {children}
+            <Footer />
+          </div>
+          <WhatsAppFloat href={getWhatsAppUrl()} />
+        </LanguageProvider>
       </body>
     </html>
   );

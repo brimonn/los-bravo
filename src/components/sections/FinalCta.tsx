@@ -1,6 +1,23 @@
+"use client";
+
 import { getWhatsAppUrl } from "@/lib/constants";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function FinalCta() {
+  const { language } = useLanguage();
+  const copy = {
+    es: {
+      title: "¿LISTO PARA ORDENAR?",
+      description: "Te esperamos en Los Bravo. Escribinos y disfruta de un servicio de calidad.",
+      cta: "Pedir por WhatsApp",
+    },
+    en: {
+      title: "READY TO ORDER?",
+      description: "We are waiting for you at Los Bravo. Message us and enjoy great service.",
+      cta: "Order via WhatsApp",
+    },
+  }[language];
+
   return (
     <section
       id="contacto"
@@ -8,10 +25,10 @@ export function FinalCta() {
     >
       <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
         <h2 className="font-display text-4xl tracking-wide text-white md:text-5xl lg:text-6xl">
-          ¿LISTO PARA ORDENAR?
+          {copy.title}
         </h2>
         <p className="mt-4 text-lg text-white/90 md:text-xl">
-          Te esperamos en Los Bravo. Escribinos y disfruta de un servicio de calidad.
+          {copy.description}
         </p>
         <a
           href={getWhatsAppUrl()}
@@ -19,7 +36,7 @@ export function FinalCta() {
           rel="noopener noreferrer"
           className="mt-10 inline-flex min-h-[3.5rem] w-full items-center justify-center rounded-full bg-white px-8 py-4 text-lg font-bold text-bravo-red shadow-xl transition hover:bg-bravo-white hover:shadow-2xl sm:w-auto"
         >
-          Pedir por WhatsApp
+          {copy.cta}
         </a>
       </div>
     </section>

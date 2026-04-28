@@ -1,16 +1,37 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { SITE, getWhatsAppUrl } from "@/lib/constants";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function Hero() {
-  
+  const { language } = useLanguage();
   const heroMin = "min-h-[calc(100svh-var(--header-offset))]";
+  const copy = {
+    es: {
+      alt: "Hamburguesas y comida rápida Los Bravo Liberia",
+      kicker: "Comida rápida · Liberia",
+      tagline: SITE.tagline,
+      express: "Servicio express disponible",
+      order: "Ordenar por WhatsApp",
+      seeMenu: "Ver menú",
+    },
+    en: {
+      alt: "Burgers and fast food at Los Bravo Liberia",
+      kicker: "Fast food · Liberia",
+      tagline: "The best wings and burgers in Liberia",
+      express: "Delivery service available",
+      order: "Order via WhatsApp",
+      seeMenu: "See menu",
+    },
+  }[language];
 
   return (
     <section className={`relative ${heroMin} overflow-hidden`}>
       <Image
         src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=1920&q=85"
-        alt="Hamburguesas y comida rápida Los Bravo Liberia"
+        alt={copy.alt}
         fill
         priority
         className="object-cover"
@@ -23,17 +44,17 @@ export function Hero() {
         className={`relative mx-auto flex max-w-6xl flex-col justify-end gap-8 px-4 pb-16 pt-24 sm:px-6 md:justify-center md:pb-24 md:pt-24 ${heroMin}`}
       >
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-bravo-red">
-          Comida rápida · Liberia
+          {copy.kicker}
         </p>
         <h1 className="font-display text-5xl leading-[0.92] tracking-wide text-white sm:text-6xl md:text-7xl lg:text-8xl">
           <span className="block">LOS BRAVO</span>
           <span className="block text-bravo-red">LIBERIA</span>
         </h1>
         <p className="max-w-xl text-base font-medium leading-relaxed text-white/80">
-          {SITE.tagline}
+          {copy.tagline}
         </p>
         <p className="max-w-xl border-l-4 border-bravo-red pl-4 text-base font-semibold leading-snug text-white md:text-lg">
-          Servicio express disponible
+          {copy.express}
         </p>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <a
@@ -42,13 +63,13 @@ export function Hero() {
             rel="noopener noreferrer"
             className="inline-flex min-h-[3rem] items-center justify-center rounded-full bg-bravo-red px-8 py-3.5 text-base font-semibold text-white shadow-[0_0_32px_var(--bravo-red-glow)] transition hover:bg-bravo-red-dark hover:shadow-[0_0_48px_var(--bravo-red-glow)] active:scale-[0.98]"
           >
-            Ordenar por WhatsApp
+            {copy.order}
           </a>
           <Link
             href="/menu"
             className="inline-flex min-h-[3rem] items-center justify-center rounded-full border-2 border-white/25 bg-white/5 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition hover:border-bravo-red hover:bg-white/10"
           >
-            Ver menú
+            {copy.seeMenu}
           </Link>
         </div>
       </div>

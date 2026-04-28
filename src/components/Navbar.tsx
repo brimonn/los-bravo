@@ -3,13 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { LogoBravo } from "@/components/LogoBravo";
-
-const links = [
-  { href: "/", label: "Inicio" },
-  { href: "/menu", label: "Menú" },
-  { href: "/#ubicacion", label: "Ubicación" },
-  { href: "/#contacto", label: "Contacto" },
-] as const;
+import { useLanguage } from "@/components/LanguageProvider";
 
 type NavbarProps = {
   whatsappHref: string;
@@ -17,6 +11,39 @@ type NavbarProps = {
 
 export function Navbar({ whatsappHref }: NavbarProps) {
   const [open, setOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
+
+  const copy = {
+    es: {
+      home: "Inicio",
+      menu: "Menú",
+      location: "Ubicación",
+      contact: "Contacto",
+      whatsapp: "WhatsApp",
+      orderByWhatsapp: "Ordenar por WhatsApp",
+      openMenu: "Abrir menú",
+      closeMenu: "Cerrar menú",
+      menuAria: "Menú",
+    },
+    en: {
+      home: "Home",
+      menu: "Menu",
+      location: "Location",
+      contact: "Contact",
+      whatsapp: "WhatsApp",
+      orderByWhatsapp: "Order via WhatsApp",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
+      menuAria: "Menu",
+    },
+  }[language];
+
+  const links = [
+    { href: "/", label: copy.home },
+    { href: "/menu", label: copy.menu },
+    { href: "/#ubicacion", label: copy.location },
+    { href: "/#contacto", label: copy.contact },
+  ] as const;
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 border-b border-white/10 bg-bravo-black/90 backdrop-blur-md">
@@ -46,18 +73,36 @@ export function Navbar({ whatsappHref }: NavbarProps) {
             rel="noopener noreferrer"
             className="rounded-full bg-bravo-red px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_24px_var(--bravo-red-glow)] transition hover:bg-bravo-red-dark hover:shadow-[0_0_32px_var(--bravo-red-glow)]"
           >
-            WhatsApp
+            {copy.whatsapp}
           </a>
+          <div className="inline-flex rounded-full border border-white/20 p-1">
+            <button
+              type="button"
+              onClick={() => setLanguage("es")}
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${language === "es" ? "bg-white text-black" : "text-white/80 hover:text-white"}`}
+              aria-label="Cambiar idioma a español"
+            >
+              ES
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage("en")}
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${language === "en" ? "bg-white text-black" : "text-white/80 hover:text-white"}`}
+              aria-label="Switch language to English"
+            >
+              EN
+            </button>
+          </div>
         </nav>
 
         <button
           type="button"
           className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/15 text-white transition hover:border-bravo-red/50 hover:bg-white/5 md:hidden"
           aria-expanded={open}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-label={open ? copy.closeMenu : copy.openMenu}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="sr-only">Menú</span>
+          <span className="sr-only">{copy.menuAria}</span>
           <svg
             className="h-6 w-6"
             fill="none"
@@ -103,8 +148,26 @@ export function Navbar({ whatsappHref }: NavbarProps) {
             className="mt-2 rounded-full bg-bravo-red py-3.5 text-center text-base font-semibold text-white"
             onClick={() => setOpen(false)}
           >
-            Ordenar por WhatsApp
+            {copy.orderByWhatsapp}
           </a>
+          <div className="mt-2 inline-flex max-w-fit rounded-full border border-white/20 p-1">
+            <button
+              type="button"
+              onClick={() => setLanguage("es")}
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${language === "es" ? "bg-white text-black" : "text-white/80 hover:text-white"}`}
+              aria-label="Cambiar idioma a español"
+            >
+              ES
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage("en")}
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${language === "en" ? "bg-white text-black" : "text-white/80 hover:text-white"}`}
+              aria-label="Switch language to English"
+            >
+              EN
+            </button>
+          </div>
         </nav>
       </div>
     </header>

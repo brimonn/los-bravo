@@ -1,6 +1,14 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 type Props = { href: string };
 
 export function WhatsAppFloat({ href }: Props) {
+  const pathname = usePathname();
+
+  if (pathname?.includes("/menu")) return null;
+
   return (
     <a
       href={href}

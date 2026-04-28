@@ -1,16 +1,31 @@
+"use client";
+
 import { reviews } from "@/data/reviews";
 import { StarRating } from "@/components/StarRating";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function Reviews() {
+  const { language } = useLanguage();
+  const copy = {
+    es: {
+      kicker: "Opiniones reales",
+      title: "LA GENTE LO DICE",
+    },
+    en: {
+      kicker: "Real reviews",
+      title: "WHAT PEOPLE SAY",
+    },
+  }[language];
+
   return (
     <section className="border-t border-white/10 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-12 text-center md:mb-16">
           <p className="text-sm font-semibold uppercase tracking-widest text-bravo-red">
-            Opiniones reales
+            {copy.kicker}
           </p>
           <h2 className="mt-2 font-display text-4xl tracking-wide text-white md:text-5xl">
-            LA GENTE LO DICE
+            {copy.title}
           </h2>
         </div>
 
